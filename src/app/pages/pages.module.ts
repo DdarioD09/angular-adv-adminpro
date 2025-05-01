@@ -6,22 +6,25 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
 import { SharedModule } from '../shared/shared.module';
 
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
-import { Graphic1Component } from './graphic1/graphic1.component';
+import { Chart1Component } from './chart1/chart1.component';
 import { PagesComponent } from './pages.component';
 
 @NgModule({
   declarations: [
+    AccountSettingsComponent,
+    Chart1Component,
     DashboardComponent,
     ProgressComponent,
-    Graphic1Component,
     PagesComponent
   ],
   exports: [
+    AccountSettingsComponent,
+    Chart1Component,
     DashboardComponent,
     ProgressComponent,
-    Graphic1Component,
     PagesComponent
   ],
 
