@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from '../services/settings.service';
 
 @Component({
   selector: 'app-pages',
@@ -8,11 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesComponent implements OnInit {
   year = new Date().getFullYear();
-  linkTheme = document.querySelector('#theme');
+
+  constructor(private settingsServices: SettingsService) { }
 
   ngOnInit() {
-    const url = localStorage.getItem('theme') || './assets/css/colors/default-dark.css';
-    this.linkTheme?.setAttribute('href', url);
   }
 
 }
