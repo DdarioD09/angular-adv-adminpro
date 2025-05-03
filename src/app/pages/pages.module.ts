@@ -11,6 +11,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Chart1Component } from './chart1/chart1.component';
 import { PagesComponent } from './pages.component';
+import { PromiseComponent } from './promise/promise.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { PagesComponent } from './pages.component';
     Chart1Component,
     DashboardComponent,
     ProgressComponent,
-    PagesComponent
+    PagesComponent,
+    PromiseComponent,
+    RxjsComponent
   ],
   exports: [
     AccountSettingsComponent,
