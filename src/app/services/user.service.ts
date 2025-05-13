@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
+import { User } from '../models/user.model';
 
 declare const google: any;
 
@@ -17,6 +18,7 @@ const base_url = environment.apiUrl;
 })
 export class UserService {
   private isGoogleInitialized = false;
+  user!: User;
 
   constructor(private http: HttpClient, private ngZone: NgZone, private router: Router) { }
 
@@ -47,10 +49,12 @@ export class UserService {
       }
     })
       .pipe(
-        tap((resp: any) => {
+        map((resp: any) => {
+          const { name, email, role, img, uid } = resp.user
+          this.user = new User(name, email, '', img, role, google, uid);
           localStorage.setItem('token', resp.token);
+          return true
         }),
-        map(() => true),
         catchError(() => of(false))
       );
   }
