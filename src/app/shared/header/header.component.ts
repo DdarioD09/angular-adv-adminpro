@@ -18,10 +18,8 @@ export class HeaderComponent {
   }
 
   logout() {
-    console.log('logout');
-
-    this.userService.googleLogout();
-    // this.router.navigateByUrl('/login');
+    localStorage.removeItem('token');
+    this.user.google ? this.userService.googleLogout() : this.router.navigateByUrl('/login');
   }
 
 }
