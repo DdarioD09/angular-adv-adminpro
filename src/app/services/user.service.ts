@@ -22,6 +22,14 @@ export class UserService {
 
   constructor(private http: HttpClient, private ngZone: NgZone, private router: Router) { }
 
+  get token(): string {
+    return localStorage.getItem('token') || '';
+  }
+
+  get uid(): string {
+    return this.user.uid || '';
+  }
+
   createUser(formData: RegisterForm): Observable<RegisterForm> {
     return this.http.post(`${base_url}/users`, formData)
       .pipe(
@@ -41,22 +49,33 @@ export class UserService {
   }
 
   tokenValidation(): Observable<boolean> {
-    const token = localStorage.getItem('token') || '';
 
     return this.http.get(`${base_url}/login/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
     })
       .pipe(
         map((resp: any) => {
-          const { name, email, role, img, uid } = resp.user
+          const { name, email, role, google, img, uid } = resp.user;
           this.user = new User(name, email, '', img, role, google, uid);
           localStorage.setItem('token', resp.token);
           return true
         }),
         catchError(() => of(false))
       );
+  }
+
+  updateProfile(data: { email: string, name: string, role: string }) {
+    data = {
+      ...data,
+      role: this.user.role || ''
+    }
+    return this.http.put(`${base_url}/users/${this.uid}`, data, {
+      headers: {
+        'x-token': this.token
+      }
+    });
   }
 
   // GOOGLE Services to manage the user loging and logout
