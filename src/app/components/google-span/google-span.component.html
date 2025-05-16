@@ -1,0 +1,7 @@
+<span class="label label-google">
+    <ng-container *ngFor="let word of text.split(''); let i = index">
+        <span [style.color]="colors[i % colors.length]">
+            {{word}}
+        </span>
+    </ng-container>
+</span>

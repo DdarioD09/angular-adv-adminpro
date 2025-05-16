@@ -6,15 +6,18 @@ import { NgChartsModule } from 'ng2-charts';
 
 import { IncreaserComponent } from './increaser/increaser.component';
 import { DoughnutComponent } from './doughnut/doughnut.component';
+import { GoogleSpanComponent } from './google-span/google-span.component';
 
 @NgModule({
   declarations: [
     IncreaserComponent,
-    DoughnutComponent
+    DoughnutComponent,
+    GoogleSpanComponent
   ],
   exports: [
     IncreaserComponent,
-    DoughnutComponent
+    DoughnutComponent,
+    GoogleSpanComponent
   ],
   imports: [
     CommonModule,
