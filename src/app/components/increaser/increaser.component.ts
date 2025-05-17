@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { every } from 'rxjs';
 
 @Component({
   selector: 'app-increaser',
