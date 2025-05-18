@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class GoogleSpanComponent {
   text = 'Google'
-  colors = ['blue', 'red', 'orange', 'blue', 'green', 'red']
+  colors = ['#4285F4', '#DB4437', '#F4B400', '#4285F4', '#0F9D58', '#DB4437']
 
 }
