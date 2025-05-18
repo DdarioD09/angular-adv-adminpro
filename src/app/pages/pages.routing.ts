@@ -11,6 +11,7 @@ import { AccountSettingsComponent } from "./account-settings/account-settings.co
 import { PromiseComponent } from "./promise/promise.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { UserComponent } from "./maintenances/user/user.component";
 
 const routes: Routes = [
     {
@@ -25,6 +26,9 @@ const routes: Routes = [
             { path: 'promise', component: PromiseComponent, data: { title: 'Promise' } },
             { path: 'rxjs', component: RxjsComponent, data: { title: 'RxJs' } },
             { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
+
+            // Maintenance
+            { path: 'users', component: UserComponent, data: { title: 'Aplication users' } },
         ]
     },
 ]

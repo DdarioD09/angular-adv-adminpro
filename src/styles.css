@@ -15,7 +15,34 @@
     width: 200px;
 }
 
+.img-avatar-table {
+    width: 30px;
+    border-radius: 100%;
+}
+
 .label-google {
     border: 1px solid black;
     letter-spacing: -1px;
+}
+
+.w100 {
+    width: 100px;
+}
+
+.w140 {
+    width: 140px;
+}
+
+.background-image-modal {
+    background-color: rgba(0, 0, 0, 0.4);
+    left: 0px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1000;
+}
+
+.hide-modal {
+    display: none;
 }

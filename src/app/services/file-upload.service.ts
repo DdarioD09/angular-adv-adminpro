@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
+import { CollectionTypeEnum } from '../enums/collection-type.enum';
 
 const base_url = environment.apiUrl;
 
@@ -13,7 +14,7 @@ export class FileUploadService {
 
   constructor() { }
 
-  async updatePicture(file: File, type: 'users' | 'doctors' | 'hospitals', id: string) {
+  async updatePicture(file: File, type: CollectionTypeEnum, id: string) {
     try {
       const url = `${base_url}/upload/${type}/${id}`;
       const formData = new FormData();

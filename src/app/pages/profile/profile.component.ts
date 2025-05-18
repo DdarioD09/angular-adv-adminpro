@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { FileUploadService } from '../..//services/file-upload.service';
+import { CollectionTypeEnum } from 'src/app/enums/collection-type.enum';
 
 @Component({
   selector: 'app-profile',
@@ -63,7 +64,7 @@ export class ProfileComponent implements OnInit {
 
   updatePicture() {
     //TODO improve user experience when change profile picture look on intertnet wich option is the best
-    this.fileUploadService.updatePicture(this.imageToUpload, 'users', this.user.uid as string)
+    this.fileUploadService.updatePicture(this.imageToUpload, CollectionTypeEnum.Users, this.user.uid as string)
       .then(img => {
         this.user.img = img;
         Swal.fire('Good job!', 'The profile picture has been updated!', 'success');
