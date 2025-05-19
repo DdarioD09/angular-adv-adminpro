@@ -4,7 +4,7 @@ import { map } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
-import { CollectionTypeEnum } from '../enums/collection-type.enum';
+import { CollectionType } from '../types/collection.type';
 
 const base_url = environment.apiUrl;
 
@@ -31,21 +31,21 @@ export class SearchService {
     });
   }
 
-  searchByType(type: CollectionTypeEnum, value: string) {
+  searchByType(type: CollectionType, value: string) {
     const url = `${base_url}/all/collection/${type}/${value}`;
     return this.http.get<any[]>(url, this.headers)
       .pipe(
         map((resp: any) => {
 
           switch (type) {
-            case CollectionTypeEnum.Users:
+            case 'users':
               return this.mapToUsers(resp.result);
 
-            case CollectionTypeEnum.Hospitals:
+            case 'hospitals':
               return [];
               break;
 
-            case CollectionTypeEnum.Doctors:
+            case 'doctors':
               return [];
               break;
 

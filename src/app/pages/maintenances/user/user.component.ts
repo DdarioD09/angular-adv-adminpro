@@ -6,7 +6,6 @@ import { User } from 'src/app/models/user.model';
 import { ModalImageService } from 'src/app/services/modal-image.service';
 import { SearchService } from 'src/app/services/search.service';
 import { UserService } from 'src/app/services/user.service';
-import { CollectionTypeEnum } from 'src/app/enums/collection-type.enum';
 
 @Component({
   selector: 'app-user',
@@ -56,7 +55,7 @@ export class UserComponent implements OnInit {
       return;
     }
 
-    this.seachService.searchByType(CollectionTypeEnum.Users, value)
+    this.seachService.searchByType('users', value)
       .subscribe((users: User[]) => {
         this.users = users
         this.totalUsers = this.users.length
@@ -99,7 +98,7 @@ export class UserComponent implements OnInit {
   }
 
   openImageModal(user: User) {
-    this.modalImageService.openModal(CollectionTypeEnum.Users, user.uid as string, user.img);
+    this.modalImageService.openModal('users', user.uid as string, user.img);
   }
 
 }

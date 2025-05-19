@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
-import { CollectionTypeEnum } from '../enums/collection-type.enum';
+import { CollectionType } from '../types/collection.type';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,7 +13,7 @@ export class ModalImageService {
   private _hideModal = true;
   public imgUrl !: string;
   public id!: string;
-  public type!: CollectionTypeEnum;
+  public type!: CollectionType;
 
   public imageUpdated: EventEmitter<string> = new EventEmitter<string>();
 
@@ -23,7 +23,7 @@ export class ModalImageService {
     return this._hideModal;
   }
 
-  openModal(type: CollectionTypeEnum, id: string, img: string = 'no-img') {
+  openModal(type: CollectionType, id: string, img: string = 'no-img') {
     this._hideModal = false;
     this.type = type;
     this.id = id;
