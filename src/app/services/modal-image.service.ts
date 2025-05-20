@@ -1,8 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 import { CollectionType } from '../types/collection.type';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 const base_url = environment.apiUrl;
 
@@ -17,7 +16,7 @@ export class ModalImageService {
 
   public imageUpdated: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   get hideModal(): boolean {
     return this._hideModal;
