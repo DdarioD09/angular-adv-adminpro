@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { User } from 'src/app/models/user.model';
@@ -9,21 +10,28 @@ import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
+  templateUrl: './users.component.html',
   styles: ``
 })
-export class UserComponent implements OnInit {
-  public users!: User[];
+export class UsersComponent implements OnInit, OnDestroy {
+  public users: User[] = [];
+  public tempUsers: User[] = [];
   public totalUsers = 0;
+  public tempTotalUsers = 0;
   public from = 0;
   public isLoading = true;
+  public imgSubs!: Subscription;
 
   constructor(private userService: UserService, private seachService: SearchService, private modalImageService: ModalImageService) { }
 
   ngOnInit(): void {
     this.loadUsers();
 
-    this.modalImageService.imageUpdated.subscribe(this.loadUsers);
+    this.imgSubs = this.modalImageService.imageUpdated.subscribe(() => this.loadUsers())
+  }
+
+  ngOnDestroy(): void {
+    this.imgSubs.unsubscribe();
   }
 
   loadUsers() {
@@ -31,6 +39,8 @@ export class UserComponent implements OnInit {
       next: ({ total, users }) => {
         this.totalUsers = total;
         this.users = users
+        this.tempUsers = users;
+        this.tempTotalUsers = total;
         this.isLoading = false;
       },
       error: (e) => console.log(e)
@@ -49,16 +59,17 @@ export class UserComponent implements OnInit {
     this.loadUsers();
   }
 
-  searchUsers(value: string) {
-    if (!value) {
-      this.loadUsers();
+  searchUsers(searchedValue: string) {
+    if (searchedValue.trim().length === 0) {
+      this.users = this.tempUsers;
+      this.totalUsers = this.tempTotalUsers;
       return;
     }
 
-    this.seachService.searchByType('users', value)
+    this.seachService.searchByType('users', searchedValue)
       .subscribe((users: User[]) => {
-        this.users = users
-        this.totalUsers = this.users.length
+        this.users = users;
+        this.totalUsers = this.users.length;
       }
       )
   }
