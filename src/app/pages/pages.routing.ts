@@ -11,7 +11,10 @@ import { AccountSettingsComponent } from "./account-settings/account-settings.co
 import { PromiseComponent } from "./promise/promise.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
 import { ProfileComponent } from "./profile/profile.component";
-import { UserComponent } from "./maintenances/user/user.component";
+import { UsersComponent } from "./maintenances/users/users.component";
+import { HospitalsComponent } from "./maintenances/hospitals/hospitals.component";
+import { DoctorsComponent } from "./maintenances/doctors/doctors.component";
+import { DoctorComponent } from "./maintenances/doctors/doctor.component";
 
 const routes: Routes = [
     {
@@ -28,7 +31,10 @@ const routes: Routes = [
             { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
 
             // Maintenance
-            { path: 'users', component: UserComponent, data: { title: 'Aplication users' } },
+            { path: 'users', component: UsersComponent, data: { title: 'Users Maintenance' } },
+            { path: 'hospitals', component: HospitalsComponent, data: { title: 'Hospitals Maintenance' } },
+            { path: 'doctors', component: DoctorsComponent, data: { title: 'Doctors Maintenance' } },
+            { path: 'doctor/:id', component: DoctorComponent, data: { title: 'Doctors Maintenance' } },
         ]
     },
 ]

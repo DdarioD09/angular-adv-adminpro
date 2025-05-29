@@ -42,15 +42,10 @@ export class SearchService {
               return this.mapToUsers(resp.result);
 
             case 'hospitals':
-              return [];
-              break;
+              return resp.result;
 
             case 'doctors':
-              return [];
-              break;
-
-            default:
-              return [];
+              return resp.result;
           }
 
         })
