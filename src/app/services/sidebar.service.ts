@@ -1,31 +1,21 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
 
-  menu: any[] = [
-    {
-      title: 'Dashboard',
-      icon: 'mdi mdi-gauge',
-      submenu: [
-        { title: 'Main', url: '/' },
-        { title: 'ProgressBar', url: 'progress' },
-        { title: 'Chart 1', url: 'chart1' },
-        { title: 'Promise', url: 'promise' },
-        { title: 'RxJs', url: 'rxjs' }
-      ]
-    },
-    {
-      title: 'Maintenance',
-      icon: 'mdi mdi-folder-lock-open',
-      submenu: [
-        { title: 'Users', url: 'users' },
-        { title: 'Hospitals', url: 'hospitals' },
-        { title: 'Doctors', url: 'doctors' }
-      ]
+  private menu = new BehaviorSubject<any[]>([]);
+
+  get menu$() {
+    return this.menu.asObservable();
+  }
+
+  loadMenu() {
+    const menu = localStorage.getItem('menu')
+    if (menu) {
+      this.menu.next(JSON.parse(menu));
     }
-  ]
-  constructor() { }
+  }
 }

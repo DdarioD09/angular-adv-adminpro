@@ -24,8 +24,7 @@ export class HeaderComponent {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.user.google ? this.userService.googleLogout() : this.router.navigateByUrl('/login');
+    this.userService.logout();
   }
 
 }

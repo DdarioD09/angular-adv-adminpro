@@ -2,6 +2,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 
 import { authGuard } from "../guards/auth.guard";
+import { adminGuard } from "../guards/admin.guard";
 
 import { PagesComponent } from "./pages.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
@@ -33,10 +34,12 @@ const routes: Routes = [
             { path: 'search/:value', component: SearchesComponent, data: { title: 'Search' } },
 
             // Maintenance
-            { path: 'users', component: UsersComponent, data: { title: 'Users Maintenance' } },
             { path: 'hospitals', component: HospitalsComponent, data: { title: 'Hospitals Maintenance' } },
             { path: 'doctors', component: DoctorsComponent, data: { title: 'Doctors Maintenance' } },
             { path: 'doctor/:id', component: DoctorComponent, data: { title: 'Doctors Maintenance' } },
+
+            // ADMIN routes
+            { path: 'users', canActivate: [adminGuard], component: UsersComponent, data: { title: 'Users Maintenance' } },
         ]
     },
 ]

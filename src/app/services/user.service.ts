@@ -31,10 +31,19 @@ export class UserService {
     return this.user.uid || '';
   }
 
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.user.role || 'USER_ROLE';
+  }
+
   get headers() {
     return {
       headers: { 'x-token': this.token }
     }
+  }
+
+  setLocalStorage(token: string, menu: any) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
   }
 
   // Auth Services
@@ -42,18 +51,14 @@ export class UserService {
   createUser(formData: RegisterForm): Observable<RegisterForm> {
     return this.http.post(`${base_url}/users`, formData)
       .pipe(
-        tap((resp: any) => {
-          localStorage.setItem('token', resp.token)
-        })
+        tap((resp: any) => this.setLocalStorage(resp.token, resp.menu))
       );
   }
 
   login(formData: LoginForm): Observable<LoginForm> {
     return this.http.post(`${base_url}/login`, formData)
       .pipe(
-        tap((resp: any) => {
-          localStorage.setItem('token', resp.token);
-        })
+        tap((resp: any) => this.setLocalStorage(resp.token, resp.menu))
       );
   }
 
@@ -64,7 +69,7 @@ export class UserService {
         map((resp: any) => {
           const { name, email, role, google, img, uid } = resp.user;
           this.user = new User(name, email, '', img, role, google, uid);
-          localStorage.setItem('token', resp.token);
+          this.setLocalStorage(resp.token, resp.menu);
           return true
         }),
         catchError(() => of(false))
@@ -105,17 +110,18 @@ export class UserService {
   googleLogin(token: string): Observable<string> {
     return this.http.post(`${base_url}/login/google`, { token })
       .pipe(
-        tap((resp: any) => {
-          localStorage.setItem('token', resp.token);
-        })
-      )
+        tap((resp: any) => this.setLocalStorage(resp.token, resp.menu))
+      );
   }
 
-  googleLogout() {
-    google.accounts.id.revoke('dariod.dazaa09@gmail.com', () => {
-      console.log('consent revoked');
-      this.router.navigateByUrl('/login')
-    });
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('menu');
+
+    if (this.user.google) {
+      google.accounts.id.revoke(this.user.email, () => { });
+    }
+    this.router.navigateByUrl('/login');
   }
 
   // User maintenance

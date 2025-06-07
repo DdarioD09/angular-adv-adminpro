@@ -16,13 +16,12 @@ export class SidebarComponent {
   user!: User
 
   constructor(private sidebarService: SidebarService, private userService: UserService, private router: Router) {
-    this.menuItems = this.sidebarService.menu;
+    this.sidebarService.menu$.subscribe(menu => this.menuItems = menu);
     this.user = this.userService.user;
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.user.google ? this.userService.googleLogout() : this.router.navigateByUrl('/login');
+    this.userService.logout();
   }
 
 }
