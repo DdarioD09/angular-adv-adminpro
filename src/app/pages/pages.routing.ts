@@ -15,6 +15,7 @@ import { UsersComponent } from "./maintenances/users/users.component";
 import { HospitalsComponent } from "./maintenances/hospitals/hospitals.component";
 import { DoctorsComponent } from "./maintenances/doctors/doctors.component";
 import { DoctorComponent } from "./maintenances/doctors/doctor.component";
+import { SearchesComponent } from "./searches/searches.component";
 
 const routes: Routes = [
     {
@@ -23,12 +24,13 @@ const routes: Routes = [
         component: PagesComponent,
         children: [
             { path: '', component: DashboardComponent, data: { title: 'Dashboard' } },
-            { path: 'progress', component: ProgressComponent, data: { title: 'ProgressBar' } },
-            { path: 'chart1', component: Chart1Component, data: { title: 'Chart 1' } },
             { path: 'account-settings', component: AccountSettingsComponent, data: { title: 'Theme Settings' } },
+            { path: 'chart1', component: Chart1Component, data: { title: 'Chart 1' } },
+            { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
+            { path: 'progress', component: ProgressComponent, data: { title: 'ProgressBar' } },
             { path: 'promise', component: PromiseComponent, data: { title: 'Promise' } },
             { path: 'rxjs', component: RxjsComponent, data: { title: 'RxJs' } },
-            { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
+            { path: 'search/:value', component: SearchesComponent, data: { title: 'Search' } },
 
             // Maintenance
             { path: 'users', component: UsersComponent, data: { title: 'Users Maintenance' } },

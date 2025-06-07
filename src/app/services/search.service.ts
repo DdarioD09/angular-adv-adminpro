@@ -5,6 +5,8 @@ import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
 import { CollectionType } from '../types/collection.type';
+import { Hospital } from '../models/hospital.model';
+import { Doctor } from '../models/doctor.model';
 
 const base_url = environment.apiUrl;
 
@@ -50,6 +52,16 @@ export class SearchService {
 
         })
       )
+  }
+
+  searchAll(value: string) {
+    const url = `${base_url}/all/${value}`
+    return this.http.get<{ users: User[], hospitals: Hospital[], doctors: Doctor[] }>(url, this.headers)
+      .pipe(
+        map(({ users, hospitals, doctors }) => {
+          return { users, hospitals, doctors }
+        })
+      );
   }
 
 }

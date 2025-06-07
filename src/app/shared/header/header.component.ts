@@ -17,6 +17,12 @@ export class HeaderComponent {
     this.user = this.userService.user;
   }
 
+  search(value: string) {
+    if (value.trim().length !== 0) {
+      this.router.navigateByUrl(`/dashboard/search/${value}`);
+    }
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.user.google ? this.userService.googleLogout() : this.router.navigateByUrl('/login');

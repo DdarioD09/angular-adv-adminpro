@@ -37,6 +37,10 @@
     width: 200px;
 }
 
+.w40 {
+    width: 40px;
+}
+
 .background-image-modal {
     background-color: rgba(0, 0, 0, 0.4);
     left: 0px;
