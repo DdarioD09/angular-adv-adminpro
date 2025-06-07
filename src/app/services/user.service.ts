@@ -76,12 +76,8 @@ export class UserService {
       );
   }
 
-  updateProfile(data: { email: string, name: string, role: string }) {
-    data = {
-      ...data,
-      role: this.user.role || ''
-    }
-    return this.http.put(`${base_url}/users/${this.uid}`, data, this.headers);
+  updateProfile(data: { email: string, name: string }) {
+    return this.http.put(`${base_url}/users/profile/${this.uid}`, data, this.headers);
   }
 
   // GOOGLE Services to manage the user loging and logout
